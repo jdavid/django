@@ -1,0 +1,26 @@
+#
+# Git pull
+#
+# Input   : django_repo, django_branch, django_root
+# Output  :
+# Requires:
+#
+
+- name: "Find out Git url"
+  local_action: "command git config --get remote.origin.url"
+  register: "__aux"
+  changed_when: false
+  when: "django_repo == ''"
+
+- name: "Set repository"
+  set_fact:
+    django_repo: "{{ __aux.stdout }}"
+  when: "django_repo == ''"
+
+- name: "Git pull"
+  git:
+    #repo   : "file:///{{ cwd }}"
+    repo   : "{{ django_repo }}"
+    dest   : "{{ django_root }}"
+    version: "{{ django_branch }}"
+    accept_hostkey: true

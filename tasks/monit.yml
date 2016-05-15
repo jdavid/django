@@ -1,0 +1,19 @@
+- name: "Monit configuration"
+  template:
+    src: "monit.conf"
+    dest: "{{ dir_etc }}/monit.conf"
+  notify: "restart monit"
+
+- name: "(sudo) Monit: mkdir /etc/monit.d"
+  file: "path=/etc/monit.d state=directory"
+  become: true
+  when: "django_with_sudo"
+
+- name: "Monit symlink"
+  file:
+    path: "/etc/monit.d/{{ name }}.conf"
+    state: "link"
+    src: "{{ dir_etc }}/monit.conf"
+  notify: "restart monit"
+  become: true
+  when: "django_with_sudo"

@@ -1,0 +1,18 @@
+#
+# Uwsgi configuration
+#
+# Input : dir_etc, dir_run
+# Output: file_sock, file_fifo, file_pid
+# Requires:
+#
+
+- set_fact:
+    file_sock: "{{ dir_run }}/uwsgi.socket"
+    file_fifo: "{{ dir_run }}/uwsgi.fifo"
+    file_pid : "{{ dir_run }}/uwsgi.pid"
+
+- name: "Uwsgi configuration"
+  template:
+    src: "uwsgi.ini"
+    dest: "{{ dir_etc }}/uwsgi.ini"
+  notify: "reload uwsgi"

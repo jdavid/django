@@ -1,0 +1,45 @@
+#
+# Setup settings
+#
+# Input : django_root
+# Output: settings, settings_file
+# Requires:
+#
+
+#
+# Secret key. All this code.. because lookups work in the local host instead of
+# the target server. There should be an simpler way.
+#
+- name: "Secret key: facts"
+  set_fact:
+    secret_key_file: "{{ dir_var}}/secret.txt"
+    secret_key_tmp: "/tmp/ansible/{{ ansible_hostname }}/secret.txt"
+
+- name: "Secret: fetch"
+  fetch:
+    src: "{{ secret_key_file }}"
+    dest: "{{ secret_key_tmp }}"
+    flat: "yes"
+
+- name: "Secret key: calculate"
+  set_fact:
+    secret_key: "{{ lookup('password',  secret_key_tmp + ' length=50') }}"
+
+- name: "Secret key: copy"
+  copy:
+    src: "{{ secret_key_tmp }}"
+    dest: "{{ secret_key_file }}"
+
+
+#
+# Settings proper
+#
+- name: "Settings: facts"
+  set_fact:
+    settings: "project.local_settings"
+    settings_file: "{{ django_root }}/project/local_settings.py"
+
+- name: "Copy settings file"
+  template:
+    src: "settings.py"
+    dest: "{{ settings_file }}"

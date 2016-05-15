@@ -1,0 +1,12 @@
+- name: "reload uwsgi"
+  command: "echo r > {{ file_fifo }}"
+
+- name: "reload nginx"
+  service: "name=nginx state=reloaded"
+  become: true
+  when: "django_with_sudo"
+
+- name: "restart monit"
+  service: "name=monit state=restarted"
+  become: true
+  when: "django_with_sudo"

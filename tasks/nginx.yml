@@ -1,0 +1,19 @@
+- name: "Nginx configuration"
+  template:
+    src: "nginx.conf"
+    dest: "{{ dir_etc }}/nginx.conf"
+  notify: "reload nginx"
+
+- name: "(sudo) Nginx: mkdir /etc/nginx/sites"
+  file: "path=/etc/nginx/sites state=directory"
+  become: true
+  when: "django_with_sudo"
+
+- name: "Nginx symlink"
+  file:
+    path: "/etc/nginx/sites/{{ name }}.conf"
+    state: "link"
+    src: "{{ dir_etc }}/nginx.conf"
+  notify: "reload nginx"
+  become: true
+  when: "django_with_sudo"

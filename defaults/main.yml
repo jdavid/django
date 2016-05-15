@@ -1,0 +1,19 @@
+django_repo       : ""
+python_version    : "3.4"
+
+django_root       : ""
+django_name       : ""
+django_branch     : "master"
+
+django_database   :
+  engine          : "sqlite"
+
+django_debug      : true
+django_domain     : "{{ ansible_default_ipv4.address }}.xip.io"
+django_pull       : false
+django_with_nginx : false
+django_with_monit : false
+django_with_sudo  : false
+
+static_url        : "/static/"
+media_url         : "/media/"

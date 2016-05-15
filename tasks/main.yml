@@ -1,0 +1,32 @@
+#
+# Pull, and find out instance name
+#
+
+- include: "root.yml"
+- include: "name.yml"
+
+- include: "pull.yml"
+  when: "django_pull"
+
+#
+# Action
+#
+- include: "dirs.yml"
+- include: "venv.yml"
+- include: "settings.yml"
+- include: "manage.yml"
+- include: "database.yml"
+
+#
+# uwsgi, nginx, monit
+#
+- include: "uwsgi.yml"
+
+- include: "static.yml"
+  when: "django_with_nginx"
+
+- include: "nginx.yml"
+  when: "django_with_nginx"
+
+- include: "monit.yml"
+  when: "django_with_monit"

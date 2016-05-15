@@ -1,0 +1,26 @@
+#
+# Create directories
+#
+# Input : django_root
+# Output: dir_var, dir_run, dir_etc, dir_log, dir_static, dir_media
+#
+
+- set_fact:
+    dir_etc   : "{{ django_root }}/etc"
+    dir_var   : "{{ django_root }}/var"
+    dir_run   : "{{ django_root }}/var/run"
+    dir_log   : "{{ django_root }}/var/log"
+    dir_static: "{{ django_root }}/var/static"
+    dir_media : "{{ django_root }}/var/media"
+
+- name: "Create directories"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+  with_items:
+  - "{{ dir_var }}"
+  - "{{ dir_run }}"
+  - "{{ dir_etc }}"
+  - "{{ dir_log }}"
+  - "{{ dir_static }}"
+  - "{{ dir_media }}"

@@ -1,0 +1,33 @@
+#
+# Expand root directory
+#
+# Input   : django_root
+# Output  : django_root
+# Requires:
+#
+
+# Case 1: root given, expand to absolute path
+- name: "Expand root"
+  command: "realpath {{ django_root }}"
+  register: "__aux"
+  changed_when: false
+  when: "django_root != ''"
+
+- name: "Set root-directory variable"
+  set_fact:
+    django_root: "{{ __aux.stdout }}"
+  when: "django_root != ''"
+
+# Case 2: root not given, assume
+- name: "Find out working tree root directory"
+  command: "git rev-parse --show-toplevel"
+  args:
+    warn: false
+  register: "__aux"
+  changed_when: false
+  when: "django_root == ''"
+
+- name: "Set root-directory variable"
+  set_fact:
+    django_root: "{{ __aux.stdout }}"
+  when: "django_root == ''"
