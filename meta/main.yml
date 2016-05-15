@@ -1,0 +1,4 @@
+galaxy_info:
+  author: J. David Ibáñez
+  description: Ansible role to deploy Django projects
+  min_ansible_version: 2.0
