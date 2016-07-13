@@ -27,6 +27,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Debug
 DEBUG = {{ django_debug }}
+DEBUG_PROPAGATE_EXCEPTIONS = {{ django_debug }}
 
 # Security
 ALLOWED_HOSTS = ["{{ django_domain }}"]
