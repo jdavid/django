@@ -20,14 +20,14 @@ DATABASES = {
 }
 {% endif %}
 
-# Email
-{% if django_debug %}
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-{% endif %}
-
 # Debug
 DEBUG = {{ django_debug }}
 DEBUG_PROPAGATE_EXCEPTIONS = {{ django_debug }}
+
+{% if django_debug %}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+AUTH_PASSWORD_VALIDATORS = []
+{% endif %}
 
 # Security
 ALLOWED_HOSTS = ["{{ django_domain }}"]
