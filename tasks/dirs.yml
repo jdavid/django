@@ -6,12 +6,13 @@
 #
 
 - set_fact:
-    dir_etc   : "{{ django_root }}/etc"
-    dir_var   : "{{ django_root }}/var"
-    dir_run   : "{{ django_root }}/var/run"
-    dir_log   : "{{ django_root }}/var/log"
-    dir_static: "{{ django_root }}/var/static"
-    dir_media : "{{ django_root }}/var/media"
+    dir_etc     : "{{ django_root }}/etc"
+    dir_var     : "{{ django_root }}/var"
+    dir_run     : "{{ django_root }}/var/run"
+    dir_log     : "{{ django_root }}/var/log"
+    dir_static  : "{{ django_root }}/var/static"
+    dir_media   : "{{ django_root }}/var/media"
+    dir_sendfile: "{{ django_root }}/var/sendfile"
 
 - name: "Create directories"
   file:
@@ -24,3 +25,4 @@
   - "{{ dir_log }}"
   - "{{ dir_static }}"
   - "{{ dir_media }}"
+  - "{{ dir_sendfile }}"

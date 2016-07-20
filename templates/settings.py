@@ -39,3 +39,8 @@ STATIC_URL = "{{ static_url }}"
 # Media
 MEDIA_ROOT = "{{ dir_media }}"
 MEDIA_URL = '{{ media_url }}'
+
+# Sendfile
+SENDFILE_BACKEND = 'sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
+SENDFILE_ROOT = "{{ dir_sendfile }}"
+SENDFILE_URL = "{{ sendfile_url }}"
