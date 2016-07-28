@@ -24,14 +24,8 @@
 - set_fact:
     python: "{{ __aux.stdout }}"
 
-# Ansible 2: Use just the pip module, with the new virtualenv_python option
-- name: "Setup Virtualenv"
-  command: "virtualenv -p {{ python }} {{ dir_venv }}"
-  args:
-      creates: "{{ dir_venv }}"
-
-- name: "Install Python packages"
+- name: "Virtualenv & pip"
   pip:
-    executable: "pip"
     virtualenv: "{{ dir_venv }}"
+    virtualenv_python: "{{ python }}"
     requirements: "{{ dir_etc }}/requirements.txt"
