@@ -1,3 +1,43 @@
+#
+# Certbot
+#
+- name: "Certbot dirs"
+  file:
+    path: "{{ dir_www }}/.well-known/acme-challenge"
+    state: "directory"
+
+- name: "Certbot ping file"
+  copy:
+    dest: "{{ dir_www }}/.well-known/acme-challenge/ping"
+    content: "pong"
+
+- name: "Certbot configuration"
+  template:
+    src: "certbot.conf"
+    dest: "{{ dir_etc }}/certbot.conf"
+
+#
+# HTTPS or HTTP
+#
+
+- name: "Certificate's full path"
+  set_fact:
+    certificate: "/etc/letsencrypt/live/{{ django_domain }}/fullchain.pem"
+
+- name: "Certificate is there or not"
+  stat:
+    path: "{{ certificate }}"
+  register: "st"
+
+- name: "Certificate not there, then make it empty"
+  set_fact:
+    certificate: ""
+  when: "st.stat.exists == False"
+
+#
+# Nginx
+#
+
 - name: "Nginx configuration"
   template:
     src: "nginx.conf"

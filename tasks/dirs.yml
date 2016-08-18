@@ -13,6 +13,7 @@
     dir_static  : "{{ django_root }}/var/static"
     dir_media   : "{{ django_root }}/var/media"
     dir_sendfile: "{{ django_root }}/var/sendfile"
+    dir_www     : "{{ django_root }}/var/www"
 
 - name: "Create directories"
   file:
@@ -26,3 +27,4 @@
   - "{{ dir_static }}"
   - "{{ dir_media }}"
   - "{{ dir_sendfile }}"
+  - "{{ dir_www }}"
