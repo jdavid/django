@@ -1,5 +1,6 @@
 - name: "reload uwsgi"
-  command: "echo r > {{ file_fifo }}"
+  shell: "echo r > {{ file_fifo }}"
+  when: "uwsgi_running"
 
 - name: "reload nginx"
   service: "name=nginx state=reloaded"

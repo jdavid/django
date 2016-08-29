@@ -11,6 +11,15 @@
     file_fifo: "{{ dir_run }}/uwsgi.fifo"
     file_pid : "{{ dir_run }}/uwsgi.pid"
 
+- name: "Check uwsgi is running (1/2)"
+  stat:
+    path: "{{ file_pid }}"
+  register: "__aux"
+
+- name: "Check uwsgi is running (2/2)"
+  set_fact:
+    uwsgi_running: "{{ __aux.stat.exists }}"
+
 - name: "Uwsgi configuration"
   template:
     src: "uwsgi.ini"

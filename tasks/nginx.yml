@@ -6,7 +6,7 @@
     path: "{{ dir_www }}/.well-known/acme-challenge"
     state: "directory"
 
-- name: "Certbot ping file"
+- name: "Certbot ping file (for testing only)"
   copy:
     dest: "{{ dir_www }}/.well-known/acme-challenge/ping"
     content: "pong"

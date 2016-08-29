@@ -24,3 +24,4 @@
     dest   : "{{ django_root }}"
     version: "{{ django_branch }}"
     accept_hostkey: true
+  notify: "reload uwsgi"
