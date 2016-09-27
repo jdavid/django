@@ -17,6 +17,6 @@ django_with_sudo  : false
 
 static_url        : "/static/"
 media_url         : "/media/"
-sendfile_url      : "/sendfile/"
+sendfile_url      : "/sendfile_internal/"
 
 certbot_email     : ""
