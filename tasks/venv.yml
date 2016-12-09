@@ -1,7 +1,7 @@
 #
 # Setup virtual environment
 #
-# Input : django_root
+# Input : django_root, python_venv
 # Output: dir_venv
 # Requires:
 #
@@ -44,7 +44,7 @@
 
 - name: "Update path to Python"
   set_fact:
-    python: "{{ python_venv }}/bin/python"
+    python: "{{ dir_venv }}/bin/python"
   when: "python_venv != ''"
 
 - name: "(Just) Pip"
