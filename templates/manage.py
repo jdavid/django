@@ -1,4 +1,4 @@
-#!{{ dir_venv }}/bin/python
+#!{{ python }}
 import os
 import sys
 

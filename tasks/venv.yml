@@ -42,6 +42,11 @@
     requirements: "{{ dir_etc }}/requirements.txt"
   when: "python_venv != ''"
 
+- name: "Update path to Python"
+  set_fact:
+    python: "{{ python_venv }}/bin/python"
+  when: "python_venv != ''"
+
 - name: "(Just) Pip"
   pip:
     executable: "{{ pip }}"
