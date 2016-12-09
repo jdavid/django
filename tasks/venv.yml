@@ -8,6 +8,7 @@
 
 - set_fact:
     dir_venv: "{{ django_root }}/usr"
+  when: "python_venv != ''"
 
 # Requirements as a template
 - name: "Requirements file from template"
@@ -24,8 +25,25 @@
 - set_fact:
     python: "{{ __aux.stdout }}"
 
+- name: "Find out path to pip"
+  command: "which pip"
+  register: "__aux"
+  changed_when: false
+
+- set_fact:
+    pip: "{{ __aux.stdout }}"
+
+# Action, with or without venv
 - name: "Virtualenv & pip"
   pip:
     virtualenv: "{{ dir_venv }}"
     virtualenv_python: "{{ python }}"
+    virtualenv_command: "{{ python_venv }}"
     requirements: "{{ dir_etc }}/requirements.txt"
+  when: "python_venv != ''"
+
+- name: "(Just) Pip"
+  pip:
+    executable: "{{ pip }}"
+    requirements: "{{ dir_etc }}/requirements.txt"
+  when: "python_venv == ''"
