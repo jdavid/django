@@ -1,10 +1,12 @@
-django_repo       : ""
 python_version    : "3.4"
 python_venv       : "virtualenv"
 
+django_repo       : ""
 django_root       : ""
 django_name       : ""
 django_branch     : "master"
+
+django_project    : "project"
 
 django_database   :
   engine          : "sqlite"
