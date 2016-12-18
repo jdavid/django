@@ -25,14 +25,6 @@
 - set_fact:
     python: "{{ __aux.stdout }}"
 
-- name: "Find out path to pip"
-  command: "which pip"
-  register: "__aux"
-  changed_when: false
-
-- set_fact:
-    pip: "{{ __aux.stdout }}"
-
 # Action, with or without venv
 - name: "Virtualenv & pip"
   pip:
@@ -49,6 +41,6 @@
 
 - name: "(Just) Pip"
   pip:
-    executable: "{{ pip }}"
+    executable: "pip"
     requirements: "{{ dir_etc }}/requirements.txt"
   when: "python_venv == ''"
