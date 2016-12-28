@@ -25,3 +25,12 @@
     src: "uwsgi.ini"
     dest: "{{ dir_etc }}/uwsgi.ini"
   notify: "reload uwsgi"
+
+- name: "Start/Stop scripts"
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_etc }}/{{ item }}"
+    mode: "0744"
+  with_items:
+  - "start.sh"
+  - "stop.sh"
