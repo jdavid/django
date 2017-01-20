@@ -1,21 +1,15 @@
 #
 # Expand root directory
 #
-# Input   : django_root
+# Input   : django_root (optional)
 # Output  : django_root
 # Requires:
 #
 
-# Case 1: root given, expand to absolute path
+# Case 1: root given, get the canonical form
 - name: "Expand root"
-  command: "realpath {{ django_root }}"
-  register: "__aux"
-  changed_when: false
-  when: "django_root != ''"
-
-- name: "Set root-directory variable"
   set_fact:
-    django_root: "{{ __aux.stdout }}"
+    django_root: "{{ django_root|realpath }}"
   when: "django_root != ''"
 
 # Case 2: root not given, assume
