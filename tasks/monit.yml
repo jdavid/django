@@ -1,6 +1,6 @@
 - name: "Monit configuration"
   template:
-    src: "monit.conf"
+    src: "{{ monit_template }}"
     dest: "{{ dir_etc }}/monit.conf"
   notify: "restart monit"
 

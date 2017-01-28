@@ -25,3 +25,5 @@ media_url         : "/media/"
 sendfile_url      : "/sendfile_internal/"
 
 certbot_email     : ""
+
+monit_template : "monit.conf"
