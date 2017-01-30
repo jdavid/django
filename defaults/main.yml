@@ -20,10 +20,13 @@ django_with_nginx : false
 django_with_monit : false
 django_with_sudo  : false
 
+django_http       : true
+django_https      : false
+django_hsts       : 0
+certbot_email     : ""
+
 static_url        : "/static/"
 media_url         : "/media/"
 sendfile_url      : "/sendfile_internal/"
-
-certbot_email     : ""
 
 monit_template : "monit.conf"
