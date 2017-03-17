@@ -1,5 +1,16 @@
 python_version    : "3.4"
-python_venv       : "virtualenv"
+
+#
+# Python environment
+#
+# Choices: pip, conda
+python_env       : "pip"
+conda_name       : "" # XXX Not yet used
+conda_channel    : ""
+
+#
+# Django
+#
 
 django_repo       : ""
 django_branch     : "master"

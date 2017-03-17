@@ -1,0 +1,33 @@
+# TODO Write a module to create environments
+
+#
+# Install conda requirements
+#
+- name: "conda: (conda) requirements file from template"
+  template:
+    src: "requirements-conda.txt"
+    dest: "{{ dir_etc }}/requirements-conda.txt"
+
+- name: "conda: install conda requirements"
+  command: "conda install --file {{ dir_etc }}/requirements-conda.txt{% if conda_channel %} -c {{ conda_channel }}{% endif %} -y -q --json"
+  register: "__aux"
+
+
+#
+# Install pip requirements
+#
+- which:
+    name: "pip"
+
+- name: "conda: (pip) requirements file from template"
+  template:
+    src: "requirements-pip.txt"
+    dest: "{{ dir_etc }}/requirements-pip.txt"
+
+- name: "conda: install pip requirements"
+  pip:
+    requirements: "{{ dir_etc }}/requirements-pip.txt"
+    executable: "{{ pip }}"
+
+- which:
+    name: "python"

@@ -4,15 +4,20 @@
 
 - include: "root.yml"
 - include: "name.yml"
-
 - include: "pull.yml"
   when: "django_pull"
 
 #
 # Action
 #
+
 - include: "dirs.yml"
-- include: "venv.yml"
+
+- include: "pip.yml"
+  when: "python_env == 'pip'"
+- include: "conda.yml"
+  when: "python_env == 'conda'"
+
 - include: "settings.yml"
 - include: "manage.yml"
 - include: "database.yml"

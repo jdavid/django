@@ -1,0 +1,35 @@
+#
+# Setup virtual environment
+#
+# Input : django_root
+# Output: dir_venv
+# Requires:
+#
+
+# Requirements as a template
+- name: "pip: requirements file from template"
+  template:
+    src: "requirements.txt"
+    dest: "{{ dir_etc }}/requirements.txt"
+
+# TODO Change to venv (from usr)
+- name: "pip: dir_venv"
+  set_fact:
+    dir_venv: "{{ django_root }}/usr"
+
+# Internal variables
+- which:
+    name: "python{{ python_version }}"
+    dest: "python"
+
+# Action (TODO support pyvenv)
+- name: "pip: create venv and install requirements"
+  pip:
+    virtualenv: "{{ dir_venv }}"
+    virtualenv_python: "{{ python }}"
+    #virtualenv_command: "{{ python_venv }}"
+    requirements: "{{ dir_etc }}/requirements.txt"
+
+- name: "pip: update path to Python"
+  set_fact:
+    python: "{{ dir_venv }}/bin/python"
