@@ -25,10 +25,11 @@
 # Action (TODO support pyvenv)
 - name: "pip: create venv and install requirements"
   pip:
+    chdir: "{{ django_root }}"
+    requirements: "{{ dir_etc }}/requirements.txt"
     virtualenv: "{{ dir_venv }}"
     virtualenv_python: "{{ python }}"
     #virtualenv_command: "{{ python_venv }}"
-    requirements: "{{ dir_etc }}/requirements.txt"
 
 - name: "pip: update path to Python"
   set_fact:

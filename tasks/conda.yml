@@ -31,6 +31,7 @@
 
 - name: "conda: install pip requirements"
   pip:
+    chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements-pip.txt"
     executable: "{{ pip }}"
 
