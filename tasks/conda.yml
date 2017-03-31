@@ -9,7 +9,7 @@
     dest: "{{ dir_etc }}/requirements-conda.txt"
 
 - name: "conda: install conda requirements"
-  command: "conda install --file {{ dir_etc }}/requirements-conda.txt{% if conda_channel %} -c {{ conda_channel }}{% endif %} -y -q --json"
+  command: "{% if django_prefix %}{{ django_prefix }}/bin/{% endif %}conda install --file {{ dir_etc }}/requirements-conda.txt{% if conda_channel %} -c {{ conda_channel }}{% endif %} -y -q --json"
   register: "__aux"
 
 
@@ -18,6 +18,11 @@
 #
 - which:
     name: "pip"
+  when: "django_prefix == ''"
+
+- set_fact:
+    pip: "{{ django_prefix }}/bin/pip"
+  when: "django_prefix != ''"
 
 - name: "conda: (pip) requirements file from template"
   template:
@@ -31,3 +36,8 @@
 
 - which:
     name: "python"
+  when: "django_prefix == ''"
+
+- set_fact:
+    python: "{{ django_prefix }}/bin/python"
+  when: "django_prefix != ''"
