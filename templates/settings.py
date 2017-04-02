@@ -22,8 +22,9 @@ DATABASES = {
 
 # Debug
 DEBUG = {{ django_debug }}
-
 {% if django_debug %}
+INTERNAL_IPS = ['127.0.0.1']
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_PASSWORD_VALIDATORS = []
 {% endif %}
