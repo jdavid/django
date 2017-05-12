@@ -4,10 +4,16 @@ python_version    : "3.4"
 # Python environment
 #
 # Choices: pip, conda
-python_env       : "pip"
-conda_name       : "" # XXX Not yet used
-conda_channel    : ""
-env_vars         : []
+python_env        : "pip"
+conda_name        : "" # XXX Not yet used
+conda_channel     : ""
+env_vars          : []
+
+#
+# Upstream server
+#
+
+django_port       : null
 
 #
 # Django
