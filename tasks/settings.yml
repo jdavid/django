@@ -13,7 +13,7 @@
 - name: "Secret key: facts"
   set_fact:
     secret_key_file: "{{ dir_var}}/secret.txt"
-    secret_key_tmp: "/tmp/{{ user }}/ansible/{{ ansible_hostname }}/secret.txt"
+    secret_key_tmp: "/tmp/{{ local_user }}/ansible/{{ ansible_hostname }}/secret.txt"
 
 - name: "Secret: fetch"
   fetch:

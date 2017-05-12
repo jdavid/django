@@ -1,6 +1,7 @@
 user  : "{{ ansible_user_id }}"
 group : "{% if ansible_os_family == 'Debian' %}www-data{% else %}nginx{% endif %}"
 cwd   : "{{ playbook_dir|dirname }}"
+local_user: "{{ lookup('env','USER') }}"
 
 #django_root: "{{ hostvars[inventory_hostname].django_root }}"
 #django_name: "{{ hostvars[inventory_hostname].django_name }}"
