@@ -45,3 +45,9 @@ MEDIA_URL = '{{ media_url }}'
 SENDFILE_BACKEND = 'sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
 SENDFILE_ROOT = "{{ dir_sendfile }}"
 SENDFILE_URL = "{{ sendfile_url }}"
+
+# Local settings, these should not be committed
+try:
+    from settings_local import *
+except ImportError:
+    pass
