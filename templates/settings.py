@@ -48,6 +48,6 @@ SENDFILE_URL = "{{ sendfile_url }}"
 
 # Local settings, these should not be committed
 try:
-    from settings_local import *
+    from .settings_local import *
 except ImportError:
     pass
