@@ -12,10 +12,9 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
-# TODO Change to venv (from usr)
 - name: "pip: dir_venv"
   set_fact:
-    dir_venv: "{{ django_root }}/usr"
+    dir_venv: "{{ django_root }}/venv"
 
 # Internal variables
 - which:
