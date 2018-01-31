@@ -25,7 +25,8 @@
 
 - name: "Certificate's full path"
   set_fact:
-    certificate: "/etc/letsencrypt/live/{{ django_domain }}/fullchain.pem"
+    certificate: "/etc/letsencrypt/live/{{ django_domains[0] }}/fullchain.pem"
+    certificate_key: "/etc/letsencrypt/live/{{ django_domains[0] }}/privkey.pem"
   when: "django_https"
 
 - name: "Certificate is there or not"
@@ -37,6 +38,7 @@
 - name: "Certificate not there, then make it empty"
   set_fact:
     certificate: ""
+    certificate_key: ""
   when: "django_https and st.stat.exists == False"
 
 #

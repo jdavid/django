@@ -2,7 +2,8 @@
 # Create directories
 #
 # Input : django_root
-# Output: dir_var, dir_run, dir_etc, dir_log, dir_static, dir_media
+# Output: dir_var, dir_run, dir_etc, dir_log, dir_static, dir_media,
+#         dir_sendfile, dir_www
 #
 
 - set_fact:

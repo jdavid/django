@@ -1,8 +1,8 @@
 #
 # Git pull
 #
-# Input   : django_repo, django_branch, django_root
-# Output  :
+# Input   : django_repo (optional), django_branch, django_root
+# Output  : django_repo
 # Requires:
 #
 
