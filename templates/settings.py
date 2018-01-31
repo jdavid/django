@@ -30,7 +30,7 @@ AUTH_PASSWORD_VALIDATORS = []
 {% endif %}
 
 # Security
-ALLOWED_HOSTS = [{% if django_debug %}'localhost', '127.0.0.1', '::1'{% endif %}{% for host in django_domains %}, '{{ host }}'{% endfor %}]
+ALLOWED_HOSTS = [{% for host in django_domains %}'{{ host }}', {% endfor %}{% if django_debug %}'localhost', '127.0.0.1', '::1'{% endif %}]
 SECRET_KEY = "{{ secret_key }}"
 
 # Static
