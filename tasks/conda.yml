@@ -3,14 +3,21 @@
 #
 # Install conda requirements
 #
+
+- stat:
+    path: "{{ dir_etc }}/requirements-conda.txt"
+  register: "st"
+
 - name: "conda: (conda) requirements file from template"
   template:
     src: "requirements-conda.txt"
     dest: "{{ dir_etc }}/requirements-conda.txt"
+  when: "st.stat.exists == True"
 
 - name: "conda: install conda requirements"
   command: "{% if django_prefix %}{{ django_prefix }}/bin/{% endif %}conda install --file {{ dir_etc }}/requirements-conda.txt{% if conda_channel %} -c {{ conda_channel }}{% endif %} -y -q --json"
   register: "__aux"
+  when: "st.stat.exists == True"
 
 
 #
@@ -26,13 +33,13 @@
 
 - name: "conda: (pip) requirements file from template"
   template:
-    src: "requirements-pip.txt"
-    dest: "{{ dir_etc }}/requirements-pip.txt"
+    src: "requirements.txt"
+    dest: "{{ dir_etc }}/requirements.txt"
 
 - name: "conda: install pip requirements"
   pip:
     chdir: "{{ django_root }}"
-    requirements: "{{ dir_etc }}/requirements-pip.txt"
+    requirements: "{{ dir_etc }}/requirements.txt"
     executable: "{{ pip }}"
 
 - which:
