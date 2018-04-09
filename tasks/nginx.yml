@@ -47,7 +47,7 @@
 
 - name: "Nginx configuration"
   template:
-    src: "nginx.conf"
+    src: "{{ nginx_template }}"
     dest: "{{ dir_etc }}/nginx.conf"
   notify: "reload nginx"
 

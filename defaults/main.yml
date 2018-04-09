@@ -47,4 +47,5 @@ static_url        : "/static/"
 media_url         : "/media/"
 sendfile_url      : "/sendfile_internal/"
 
-monit_template : "monit.conf"
+monit_template    : "monit.conf"
+nginx_template    : "nginx.conf"
