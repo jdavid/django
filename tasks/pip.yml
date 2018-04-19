@@ -21,14 +21,14 @@
     name: "python{{ python_version }}"
     dest: "python"
 
-# Action (TODO support pyvenv)
+# Action
 - name: "pip: create venv and install requirements"
   pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     virtualenv: "{{ dir_venv }}"
-    virtualenv_python: "{{ python }}"
-    #virtualenv_command: "{{ python_venv }}"
+    virtualenv_python: "{{ python if python_version == '2.7' else omit }}"
+    virtualenv_command: "{{ python + ' -m venv' if python_version != '2.7' else omit }}"
 
 - name: "pip: update path to Python"
   set_fact:
