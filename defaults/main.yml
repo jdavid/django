@@ -16,6 +16,17 @@ env_vars          : []
 django_port       : null
 
 #
+# Nginx
+#
+django_with_nginx  : false
+django_http        : true
+django_https       : false
+django_hsts        : 0
+nginx_template     : "nginx.conf"
+nginx_max_body_size: "10m"
+nginx_timeout      : null
+
+#
 # Django
 #
 
@@ -34,13 +45,9 @@ django_database   :
 django_debug      : true
 django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_default_ipv4.address }}.xip.io{% endif %}"
 django_pull       : false
-django_with_nginx : false
 django_with_monit : false
 django_with_sudo  : false
 
-django_http       : true
-django_https      : false
-django_hsts       : 0
 certbot_email     : ""
 
 static_url        : "/static/"
@@ -48,4 +55,3 @@ media_url         : "/media/"
 sendfile_url      : "/sendfile_internal/"
 
 monit_template    : "monit.conf"
-nginx_template    : "nginx.conf"
