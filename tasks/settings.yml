@@ -19,6 +19,7 @@
   fetch:
     src: "{{ secret_key_file }}"
     dest: "{{ secret_key_tmp }}"
+    fail_on_missing: "no"
     flat: "yes"
 
 - name: "Secret key: calculate"
