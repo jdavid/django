@@ -23,8 +23,7 @@
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     virtualenv: "{{ dir_venv }}"
-    virtualenv_python: "{{ python if python_version == '2.7' else omit }}"
-    virtualenv_command: "{{ python + ' -m venv' if python_version != '2.7' else omit }}"
+    virtualenv_command: "{{ python + ' -m venv' }}"
 
 - name: "pip: update path to Python"
   set_fact:
