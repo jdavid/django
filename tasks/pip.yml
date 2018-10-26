@@ -12,10 +12,6 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
-- name: "pip: dir_venv"
-  set_fact:
-    dir_venv: "{{ django_root }}/venv"
-
 # Internal variables
 - which:
     name: "python{{ python_version }}"
