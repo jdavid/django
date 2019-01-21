@@ -38,7 +38,7 @@ STATIC_URL = "{{ static_url }}"
 # Media
 MEDIA_ROOT = "{{ dir_media }}"
 MEDIA_URL = '{{ media_url }}'
-FILE_UPLOAD_PERMISSIONS = 0o640
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Sendfile
 SENDFILE_BACKEND = 'sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
