@@ -19,9 +19,6 @@
     dir_media   : "{{ django_root }}/var/media"
     dir_sendfile: "{{ django_root }}/var/sendfile"
     dir_www     : "{{ django_root }}/var/www"
-    dir_venv    : "{{ django_root }}/venv{{ python_version_short }}"
-
-# dir_venv is not created here, but in tasks/pip.yml
 
 - name: "Create directories"
   file:

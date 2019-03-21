@@ -12,6 +12,10 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
+# venv directory defined here, because conda expects it not to be set
+- set_fact:
+    dir_venv    : "{{ django_root }}/venv{{ python_version_short }}"
+
 # Internal variables
 - which:
     name: "python{{ python_version }}"
