@@ -1,0 +1,20 @@
+#
+# Define paths to binaries.
+# Not all binaries defined are necessarily going to be used later.
+#
+
+- which:
+    base: "{{ dir_bin }}"
+    name: "celery"
+
+- which:
+    base: "{{ dir_bin }}"
+    name: "conda"
+
+- which:
+    base: "{{ dir_bin }}"
+    name: "pip"
+
+- which:
+    base: "{{ dir_bin }}"
+    name: "python"
