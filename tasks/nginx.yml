@@ -5,19 +5,19 @@
   file:
     path: "{{ dir_www }}/.well-known/acme-challenge"
     state: "directory"
-  when: "django_https"
+  when: django_https|bool
 
 - name: "Certbot ping file (for testing only)"
   copy:
     dest: "{{ dir_www }}/.well-known/acme-challenge/ping"
     content: "pong"
-  when: "django_https"
+  when: django_https|bool
 
 - name: "Certbot configuration"
   template:
     src: "certbot.conf"
     dest: "{{ dir_etc }}/certbot.conf"
-  when: "django_https"
+  when: django_https|bool
 
 #
 # HTTPS or HTTP
@@ -27,13 +27,13 @@
   set_fact:
     certificate: "/etc/letsencrypt/live/{{ django_domains[0] }}/fullchain.pem"
     certificate_key: "/etc/letsencrypt/live/{{ django_domains[0] }}/privkey.pem"
-  when: "django_https"
+  when: django_https|bool
 
 - name: "Certificate is there or not"
   stat:
     path: "{{ certificate }}"
   register: "st"
-  when: "django_https"
+  when: django_https|bool
 
 - name: "Certificate not there, then make it empty"
   set_fact:
@@ -54,7 +54,7 @@
 - name: "(sudo) Nginx: mkdir /etc/nginx/sites"
   file: "path=/etc/nginx/sites state=directory"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool
 
 - name: "Nginx symlink"
   file:
@@ -63,4 +63,4 @@
     src: "{{ dir_etc }}/nginx.conf"
   notify: "reload nginx"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool

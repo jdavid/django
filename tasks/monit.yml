@@ -7,7 +7,7 @@
 - name: "(sudo) Monit: mkdir /etc/monit.d"
   file: "path=/etc/monit.d state=directory"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool
 
 - name: "Monit symlink"
   file:
@@ -16,4 +16,4 @@
     src: "{{ dir_etc }}/monit.conf"
   notify: "restart monit"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool

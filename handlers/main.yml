@@ -5,9 +5,9 @@
 - name: "reload nginx"
   service: "name=nginx state=reloaded"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool
 
 - name: "restart monit"
   service: "name=monit state=restarted"
   become: true
-  when: "django_with_sudo"
+  when: django_with_sudo|bool

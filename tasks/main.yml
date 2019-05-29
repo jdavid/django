@@ -5,7 +5,7 @@
 - include: "root.yml"
 - include: "name.yml"
 - include: "pull.yml"
-  when: "django_pull"
+  when: django_pull|bool
 
 #
 # Action
@@ -29,10 +29,10 @@
 - include: "uwsgi.yml"
 
 - include: "static.yml"
-  when: "django_with_nginx"
+  when: django_with_nginx|bool
 
 - include: "nginx.yml"
-  when: "django_with_nginx"
+  when: django_with_nginx|bool
 
 - include: "monit.yml"
-  when: "django_with_monit"
+  when: django_with_monit|bool
