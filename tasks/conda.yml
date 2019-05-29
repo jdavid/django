@@ -1,5 +1,3 @@
-# TODO Write a module to create environments
-
 - set_fact:
     dir_bin     : "{{ django_prefix }}/bin"
   when: "django_prefix != ''"
