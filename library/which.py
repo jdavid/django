@@ -20,12 +20,12 @@ def main():
         dest = name
 
     if base:
+        # Use base directory directly
+        out = os.path.join(base, name)
+    else:
         # Call which
         rc, out, err = module.run_command(['which', name])
         out = out.strip()
-    else:
-        # Use base directory directly
-        out = os.path.join(base, name)
 
     # Ok
     module.exit_json(changed=False, ansible_facts={dest: out})
