@@ -19,7 +19,7 @@ def main():
     if dest is None:
         dest = name
 
-    if base is None:
+    if base:
         # Call which
         rc, out, err = module.run_command(['which', name])
         out = out.strip()

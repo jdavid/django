@@ -3,7 +3,7 @@
   when: "django_prefix != ''"
 
 - set_fact:
-    dir_bin     : ""
+    dir_bin     : null
   when: "django_prefix == ''"
 
 - include: "bin.yml"
