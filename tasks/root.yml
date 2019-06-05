@@ -13,7 +13,7 @@
   when: "django_root != ''"
 
 # Case 2: root not given, assume
-- name: "Find out working tree root directory"
+- name: "Path to working tree root directory (1/2)"
   command: "git rev-parse --show-toplevel"
   args:
     warn: false
@@ -21,7 +21,7 @@
   changed_when: false
   when: "django_root == ''"
 
-- name: "Set root-directory variable"
+- name: "Path to working tree root directory (2/2)"
   set_fact:
     django_root: "{{ __aux.stdout }}"
   when: "django_root == ''"

@@ -7,10 +7,12 @@
 #         python_version_short
 #
 
-- set_fact:
+- name: "Python version"
+  set_fact:
     python_version_short: "{{ python_version|regex_replace('\\.', '') }}"
 
-- set_fact:
+- name: "Directories"
+  set_fact:
     dir_etc     : "{{ django_root }}/etc"
     dir_var     : "{{ django_root }}/var"
     dir_run     : "{{ django_root }}/var/run"

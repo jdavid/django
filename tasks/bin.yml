@@ -3,18 +3,17 @@
 # Not all binaries defined are necessarily going to be used later.
 #
 
-- which:
+- name: "Path to celery"
+  which:
     base: "{{ dir_bin }}"
     name: "celery"
 
-- which:
-    base: "{{ dir_bin }}"
-    name: "conda"
-
-- which:
+- name: "Path to pip"
+  which:
     base: "{{ dir_bin }}"
     name: "pip"
 
-- which:
+- name: "Path to python"
+  which:
     base: "{{ dir_bin }}"
     name: "python"

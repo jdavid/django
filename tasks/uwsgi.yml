@@ -6,7 +6,8 @@
 # Requires:
 #
 
-- set_fact:
+- name: "Paths to uwsgi files"
+  set_fact:
     file_sock: "{{ dir_run }}/uwsgi.socket"
     file_fifo: "{{ dir_run }}/uwsgi.fifo"
     file_pid : "{{ dir_run }}/uwsgi.pid"

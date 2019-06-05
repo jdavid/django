@@ -6,7 +6,7 @@
 # Requires:
 #
 
-- name: "Set instance name"
+- name: "Instance name"
   set_fact:
     django_name: "{{ django_root|basename }}"
   when: "django_name == ''"

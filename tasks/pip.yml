@@ -6,16 +6,19 @@
 # Requires:
 #
 
-- set_fact:
+- name: "Path to bin/ with virtual environment"
+  set_fact:
     dir_venv    : "{{ django_root }}/venv{{ python_version_short }}"
     dir_bin     : "{{ django_root }}/venv{{ python_version_short }}/bin"
   when: virtualenv|bool
 
-- set_fact:
+- name: "Path to bin/ with prefix"
+  set_fact:
     dir_bin     : "{{ prefix }}/bin"
   when: "not virtualenv and prefix"
 
-- set_fact:
+- name: "No path to bin/"
+  set_fact:
     dir_bin     : null
   when: "not virtualenv and not prefix"
 
@@ -23,19 +26,19 @@
 - include: "bin.yml"
 
 # Requirements as a template
-- name: "pip: requirements file from template"
+- name: "requirements.txt file from template"
   template:
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
 # With virtualenv
-- name: "Find out path to system's Python"
+- name: "Path to system's Python"
   which:
     name: "python{{ python_version }}"
     dest: "python_sys"
   when: virtualenv|bool
 
-- name: "Create virtual environment"
+- name: "Install requirements in virtual environment"
   pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
@@ -44,7 +47,7 @@
   when: virtualenv|bool
 
 # Without virtualenv
-- name: "Install requirements"
+- name: "Install requirements without virtual environment"
   pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"

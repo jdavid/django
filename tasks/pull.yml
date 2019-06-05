@@ -6,13 +6,13 @@
 # Requires:
 #
 
-- name: "Find out Git url"
+- name: "Git url (1/2)"
   local_action: "command git config --get remote.origin.url"
   register: "__aux"
   changed_when: false
   when: "django_repo == ''"
 
-- name: "Set repository"
+- name: "Git url (2/2)"
   set_fact:
     django_repo: "{{ __aux.stdout }}"
   when: "django_repo == ''"
