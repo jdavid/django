@@ -13,12 +13,7 @@
 
 - include: "domains.yml"
 - include: "dirs.yml"
-
 - include: "pip.yml"
-  when: "python_env == 'pip'"
-- include: "conda.yml"
-  when: "python_env == 'conda'"
-
 - include: "settings.yml"
 - include: "manage.yml"
 - include: "database.yml"

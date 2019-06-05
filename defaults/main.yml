@@ -3,11 +3,9 @@ python_version    : "3.5"
 #
 # Python environment
 #
-# Choices: pip, conda
-python_env        : "pip"
-conda_name        : "" # XXX Not yet used
-conda_channel     : ""
-env_vars          : []
+prefix            : null
+virtualenv        : true # create virtualenv or not
+env_vars          : []   # not really used
 
 #
 # Upstream server
@@ -34,7 +32,6 @@ django_repo       : ""
 django_branch     : "master"
 django_name       : ""
 
-django_prefix     : ""
 django_root       : ""
 
 django_project    : "project"

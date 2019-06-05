@@ -1,18 +1,25 @@
 #
 # Setup virtual environment
 #
-# Input : django_root
-# Output: dir_venv
+# Input : virtualenv, prefix, django_root
+# Output: dir_venv, dir_bin
 # Requires:
 #
 
-# venv directory defined here, because conda expects it not to be set
 - set_fact:
     dir_venv    : "{{ django_root }}/venv{{ python_version_short }}"
+    dir_bin     : "{{ django_root }}/venv{{ python_version_short }}/bin"
+  when: virtualenv|bool
 
 - set_fact:
-    dir_bin     : "{{ dir_venv }}/bin"
+    dir_bin     : "{{ prefix }}/bin"
+  when: "not virtualenv and prefix"
 
+- set_fact:
+    dir_bin     : null
+  when: "not virtualenv and not prefix"
+
+# Paths to binaries
 - include: "bin.yml"
 
 # Requirements as a template
@@ -21,15 +28,25 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
-# Internal variables
-- which:
+# With virtualenv
+- name: "Find out path to system's Python"
+  which:
     name: "python{{ python_version }}"
     dest: "python_sys"
+  when: virtualenv|bool
 
-# Action
-- name: "pip: create venv and install requirements"
+- name: "Create virtual environment"
   pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     virtualenv: "{{ dir_venv }}"
     virtualenv_command: "{{ python_sys + ' -m venv' }}"
+  when: virtualenv|bool
+
+# Without virtualenv
+- name: "Install requirements"
+  pip:
+    chdir: "{{ django_root }}"
+    requirements: "{{ dir_etc }}/requirements.txt"
+    executable: "{{ pip }}"
+  when: not virtualenv
