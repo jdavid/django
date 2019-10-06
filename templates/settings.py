@@ -12,7 +12,7 @@ DATABASES = {
         'NAME': '{{ django_database.name }}',
         'USER': '{{ django_database.user }}',
         'PASSWORD': '{{ django_database.password }}',
-        'HOST': '',               # Set to empty string for localhost.
+        'HOST': '{{ django_database.host|default() }}',               # Set to empty string for localhost.
         'PORT': '',               # Set to empty string for default.
     }
 }
