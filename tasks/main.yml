@@ -17,6 +17,7 @@
 - include: "settings.yml"
 - include: "manage.yml"
 - include: "database.yml"
+- include: "node_modules.yml"
 
 #
 # uwsgi, nginx, monit
