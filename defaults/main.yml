@@ -37,7 +37,10 @@ django_root       : ""
 django_project    : "project"
 
 django_database   :
-  engine          : "sqlite"
+  engine          : "default"
+
+django_cache      :
+  backend         : "default"
 
 django_debug      : true
 django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_default_ipv4.address }}.xip.io{% endif %}"
