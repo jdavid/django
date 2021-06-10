@@ -4,4 +4,4 @@ export PATH="{{ prefix }}/bin:$PATH"
 {% for var in env_vars %}
 export {{ var.name }}="{{ var.value }}"
 {% endfor %}
-uwsgi {{ dir_etc }}/uwsgi.ini
+{{ dir_bin }}/uwsgi {{ dir_etc }}/uwsgi.ini

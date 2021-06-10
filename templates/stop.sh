@@ -1,4 +1,4 @@
 {% if prefix %}
 export PATH="{{ prefix }}/bin:$PATH"
 {% endif %}
-uwsgi --stop {{ file_pid }}
+{{ dir_bin }}/uwsgi --stop {{ file_pid }}
