@@ -55,7 +55,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 {% endif %}
 
 # Sendfile
-SENDFILE_BACKEND = 'sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
+SENDFILE_BACKEND = 'django_sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
 SENDFILE_ROOT = "{{ dir_sendfile }}"
 SENDFILE_URL = "{{ sendfile_url }}"
 
