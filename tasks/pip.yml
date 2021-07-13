@@ -25,31 +25,42 @@
 # Paths to binaries
 - include: "bin.yml"
 
-# Requirements as a template
-- name: "requirements.txt file from template"
-  template:
-    src: "requirements.txt"
-    dest: "{{ dir_etc }}/requirements.txt"
-
-# With virtualenv
+# Create virtual environment
 - name: "Path to system's Python"
   which:
     name: "python{{ python_version }}"
     dest: "python_sys"
   when: virtualenv|bool
 
-- name: "Install requirements in virtual environment"
+- name: "Create virtual environment"
   pip:
     chdir: "{{ django_root }}"
-    requirements: "{{ dir_etc }}/requirements.txt"
+    name: "pip=={{ pip_version }}"
     virtualenv: "{{ dir_venv }}"
     virtualenv_command: "{{ python_sys + ' -m venv' }}"
   when: virtualenv|bool
 
-# Without virtualenv
-- name: "Install requirements without virtual environment"
+- name: "Update path to pip"
+  set_fact:
+    pip: "{{ dir_venv }}/bin/pip"
+  when: virtualenv|bool
+
+# Update pip when not using a virtual environment
+- name: "Update pip"
+  pip:
+    chdir: "{{ django_root }}"
+    name: "pip=={{ pip_version }}"
+    executable: "{{ pip }}"
+  when: not virtualenv
+
+# Install requirements
+- name: "requirements.txt file from template"
+  template:
+    src: "requirements.txt"
+    dest: "{{ dir_etc }}/requirements.txt"
+
+- name: "Install requirements"
   pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     executable: "{{ pip }}"
-  when: not virtualenv
