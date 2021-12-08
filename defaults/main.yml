@@ -51,8 +51,8 @@ django_with_sudo  : false
 
 certbot_email     : ""
 
-static_url        : "/static/"
-media_url         : "/media/"
+static_url        : "static/"
+media_url         : "media/"
 sendfile_url      : "/sendfile_internal/"
 
 monit_template    : "monit.conf"

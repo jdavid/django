@@ -30,14 +30,14 @@ AUTH_PASSWORD_VALIDATORS = []
 
 # Security
 ALLOWED_HOSTS = [{% for host in django_domains %}'{{ host }}', {% endfor %}{% if django_debug %}'localhost', '127.0.0.1', '::1'{% endif %}]
-SECRET_KEY = "{{ secret_key }}"
+SECRET_KEY = '{{ secret_key }}'
 
 # Static
-STATIC_ROOT = "{{ dir_static }}"
-STATIC_URL = "{{ static_url }}"
+STATIC_ROOT = '{{ dir_static }}'
+STATIC_URL = '{{ static_url }}'
 
 # Media
-MEDIA_ROOT = "{{ dir_media }}"
+MEDIA_ROOT = '{{ dir_media }}'
 MEDIA_URL = '{{ media_url }}'
 FILE_UPLOAD_PERMISSIONS = 0o644
 
@@ -56,8 +56,8 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 # Sendfile
 SENDFILE_BACKEND = 'django_sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
-SENDFILE_ROOT = "{{ dir_sendfile }}"
-SENDFILE_URL = "{{ sendfile_url }}"
+SENDFILE_ROOT = '{{ dir_sendfile }}'
+SENDFILE_URL = '{{ sendfile_url }}'
 
 # Local settings, these should not be committed
 try:
