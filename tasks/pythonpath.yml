@@ -1,0 +1,6 @@
+- name: "Extra PYTHONPATH"
+  set_fact:
+    pythonpath: "{{ pythonpath|realpath }}"
+  when: pythonpath
+
+#- debug: var=pythonpath

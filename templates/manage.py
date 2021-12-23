@@ -4,6 +4,10 @@ import os
 import sys
 
 
+{% if pythonpath %}
+sys.path.append("{{ pythonpath }}")
+{% endif %}
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{ settings }}')

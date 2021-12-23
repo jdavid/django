@@ -7,6 +7,7 @@ pip_version       : "21.3.1"
 prefix            : null
 virtualenv        : true # create virtualenv or not
 env_vars          : []   # not really used
+pythonpath        : null # extra pythonpath
 
 #
 # Upstream server

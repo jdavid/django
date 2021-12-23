@@ -8,10 +8,16 @@
   when: django_pull|bool
 
 #
-# Action
+# Variables (facts)
 #
 
 - include: "domains.yml"
+- include: "pythonpath.yml"
+
+#
+# Action
+#
+
 - include: "dirs.yml"
 - include: "pip.yml"
 - include: "settings.yml"
