@@ -1,5 +1,5 @@
 python_version    : "3.9"
-pip_version       : "21.3.1"
+pip_version       : "22.0.3"
 
 #
 # Python environment
