@@ -45,7 +45,7 @@ django_cache      :
   backend         : "default"
 
 django_debug      : true
-django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_default_ipv4.address }}.xip.io{% endif %}"
+django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_default_ipv4.address }}.nip.io{% endif %}"
 django_pull       : false
 django_with_monit : false
 django_with_sudo  : false

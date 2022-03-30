@@ -26,9 +26,9 @@
 - include: "node_modules.yml"
 
 #
-# uwsgi, nginx, monit
+# uvicorn, nginx, monit
 #
-- include: "uwsgi.yml"
+- include: "uvicorn.yml"
 
 - include: "static.yml"
   when: django_with_nginx|bool
