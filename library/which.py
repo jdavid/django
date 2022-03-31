@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os
+from pathlib import Path
 from ansible.module_utils.basic import AnsibleModule
 
 
@@ -21,7 +21,7 @@ def main():
 
     if base:
         # Use base directory directly
-        out = os.path.join(base, name)
+        out = str(Path(base) / name)
     else:
         # Call which
         rc, out, err = module.run_command(['which', name])

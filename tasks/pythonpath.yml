@@ -1,6 +1,17 @@
-- name: "Extra PYTHONPATH"
+#
+# TODO Write a helper like which
+#
+
+- name: "Extra PYTHONPATH (1/2)"
+  realpath:
+    base: "{{ django_root }}"
+    path: "{{ pythonpath }}"
+  register: pythonpath
+  when: pythonpath
+
+- name: "Extra PYTHONPATH (2/2)"
   set_fact:
-    pythonpath: "{{ pythonpath|realpath }}"
+    pythonpath: "{{ pythonpath.realpath }}"
   when: pythonpath
 
 #- debug: var=pythonpath
