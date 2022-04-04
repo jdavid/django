@@ -1,12 +1,11 @@
 python_version    : "3.9"
-pip_version       : "22.0.3"
+pip_version       : "22.0.4"
 
 #
 # Python environment
 #
 prefix            : null
 virtualenv        : true # create virtualenv or not
-env_vars          : []   # not really used
 pythonpath        : null # extra pythonpath
 
 #

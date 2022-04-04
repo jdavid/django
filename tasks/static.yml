@@ -1,6 +1,6 @@
 - name: "Collect static"
   django_manage:
     virtualenv: "{{ dir_venv|default(omit) }}"
-    app_path: "{{ django_root }}"
+    project_path: "{{ django_root }}"
     settings: "{{ settings }}"
     command: "collectstatic"
