@@ -36,15 +36,6 @@ SECRET_KEY = '{{ secret_key }}'
 STATIC_ROOT = '{{ dir_static }}'
 STATIC_URL = '{{ static_url }}'
 
-try:
-    import whitenoise
-    MIDDLEWARE.insert(
-        MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-    )
-except ImportError:
-    pass
-
 # Media
 MEDIA_ROOT = '{{ dir_media }}'
 MEDIA_URL = '{{ media_url }}'
@@ -67,9 +58,3 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SENDFILE_BACKEND = 'django_sendfile.backends.{% if django_debug %}development{% else %}nginx{% endif %}'
 SENDFILE_ROOT = '{{ dir_sendfile }}'
 SENDFILE_URL = '{{ sendfile_url }}'
-
-# Local settings, these should not be committed
-try:
-    from .settings_local import *
-except ImportError:
-    pass
