@@ -41,6 +41,13 @@ MEDIA_ROOT = '{{ dir_media }}'
 MEDIA_URL = '{{ media_url }}'
 FILE_UPLOAD_PERMISSIONS = 0o644
 
+# URLs
+{% if django_debug %}
+BASE_URL = 'http://localhost:{{ django_port }}'
+{% else %}
+BASE_URL = 'http{% if django_https %}s{% endif %}://{{ django_domains[0] }}'
+{% endif %}
+
 {% if django_cache.backend == 'default' %}
 {% elif django_cache.backend == 'memcached' %}
 # Cache
