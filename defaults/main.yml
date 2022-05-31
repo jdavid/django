@@ -12,7 +12,10 @@ pythonpath        : null # extra pythonpath
 # Upstream server
 #
 
-django_port       : null
+django_server     :
+  port            : null
+  threads         : 1
+  workers         : 4
 
 #
 # Nginx

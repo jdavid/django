@@ -1,7 +1,8 @@
 chdir        = '{{ django_root }}'
 
 worker_class = 'uvicorn.workers.UvicornWorker'
-workers = 4
+workers = {{ django_server.workers|default(4) }}
+threads = {{ django_server.threads|default(1) }}
 
 wsgi_app    = 'project.asgi:application'
 raw_env     =  ['DJANGO_SETTINGS_MODULE={{ settings }}']
@@ -11,8 +12,8 @@ pythonpath  = '{{ pythonpath }}'
 {% endif %}
 
 # Listen
-{% if django_port %}
-bind        = ['127.0.0.1:{{ django_port }}']
+{% if django_server.port %}
+bind        = ['127.0.0.1:{{ django_server.port }}']
 {% else %}
 bind        = ['unix:{{ file_sock }}']
 {% endif %}
