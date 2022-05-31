@@ -23,10 +23,12 @@
 - include: "uvicorn.yml"
 
 - include: "static.yml"
-  when: django_web|bool
+  when: django_web
+
+- debug: var=django_web
 
 - include: "nginx.yml"
-  when: django_web|bool
+  when: django_web
 
 - include: "monit.yml"
   when: django_with_monit|bool
