@@ -43,9 +43,9 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 # URLs
 {% if django_debug %}
-BASE_URL = 'http://localhost:{{ django_server.port }}'
+BASE_URL = 'http://localhost:{{ django_server_combined.port }}'
 {% else %}
-BASE_URL = 'http{% if django_https %}s{% endif %}://{{ django_domains[0] }}'
+BASE_URL = 'http{% if django_web_combined.https %}s{% endif %}://{{ django_domains[0] }}'
 {% endif %}
 
 {% if django_cache.backend == 'default' %}

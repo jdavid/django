@@ -1,23 +1,17 @@
-#
-# Pull, and find out instance name
-#
+# Merge default configuration with role parameters
+- include: "config.yml"
 
+# Pull, and find out instance name
 - include: "root.yml"
 - include: "name.yml"
 - include: "pull.yml"
   when: django_pull|bool
 
-#
 # Variables (facts)
-#
-
 - include: "domains.yml"
 - include: "pythonpath.yml"
 
-#
 # Action
-#
-
 - include: "dirs.yml"
 - include: "pip.yml"
 - include: "settings.yml"
@@ -25,16 +19,14 @@
 - include: "database.yml"
 - include: "node_modules.yml"
 
-#
 # uvicorn, nginx, monit
-#
 - include: "uvicorn.yml"
 
 - include: "static.yml"
-  when: django_with_nginx|bool
+  when: django_web|bool
 
 - include: "nginx.yml"
-  when: django_with_nginx|bool
+  when: django_web|bool
 
 - include: "monit.yml"
   when: django_with_monit|bool

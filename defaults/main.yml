@@ -8,25 +8,24 @@ prefix            : null
 virtualenv        : true # create virtualenv or not
 pythonpath        : null # extra pythonpath
 
-#
-# Upstream server
-#
+# Upstream server (uvicorn)
+django_server_defaults:
+  port    : null
+  threads : 1
+  workers : 4
 
-django_server     :
-  port            : null
-  threads         : 1
-  workers         : 4
-
-#
 # Nginx
-#
-django_with_nginx  : false
-django_http        : true
-django_https       : false
-django_hsts        : 0
-nginx_template     : "nginx.conf"
-nginx_max_body_size: "10m"
-nginx_timeout      : null
+django_web_defaults:
+  template      : "nginx.conf"
+  http          : true
+  https         : false
+  hsts          : 0
+  max_body_size : "10m"
+  timeout       : null
+
+# This is only used by Nginx
+django_cert_defaults:
+  email: ""
 
 #
 # Django
@@ -51,8 +50,6 @@ django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_defaul
 django_pull       : false
 django_with_monit : false
 django_with_sudo  : false
-
-certbot_email     : ""
 
 static_url        : "static/"
 media_url         : "media/"
