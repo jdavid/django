@@ -23,7 +23,7 @@
   when: "not virtualenv and not prefix"
 
 # Paths to binaries
-- include: "bin.yml"
+- import_tasks: "bin.yml"
 
 # Create virtual environment
 - name: "Path to system's Python"

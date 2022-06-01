@@ -1,34 +1,39 @@
 # Merge default configuration with role parameters
-- include: "config.yml"
+- import_tasks: "config.yml"
 
 # Pull, and find out instance name
-- include: "root.yml"
-- include: "name.yml"
-- include: "pull.yml"
+- import_tasks: "root.yml"
+  tags: [pip]
+
+- import_tasks: "name.yml"
+- import_tasks: "pull.yml"
   when: django_pull|bool
 
 # Variables (facts)
-- include: "domains.yml"
-- include: "pythonpath.yml"
+- import_tasks: "domains.yml"
+- import_tasks: "pythonpath.yml"
+
+# Virtual environment
+- import_tasks: "dirs.yml"
+  tags: [pip]
+
+- import_tasks: "pip.yml"
+  tags: [pip]
 
 # Action
-- include: "dirs.yml"
-- include: "pip.yml"
-- include: "settings.yml"
-- include: "manage.yml"
-- include: "database.yml"
-- include: "node_modules.yml"
+- import_tasks: "settings.yml"
+- import_tasks: "manage.yml"
+- import_tasks: "database.yml"
+- import_tasks: "node_modules.yml"
 
 # uvicorn, nginx, monit
-- include: "uvicorn.yml"
+- import_tasks: "uvicorn.yml"
 
-- include: "static.yml"
+- import_tasks: "static.yml"
   when: django_web
 
-- debug: var=django_web
-
-- include: "nginx.yml"
+- import_tasks: "nginx.yml"
   when: django_web
 
-- include: "monit.yml"
+- import_tasks: "monit.yml"
   when: django_with_monit|bool
