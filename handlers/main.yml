@@ -1,6 +1,6 @@
-- name: "reload uvicorn"
-  shell: "kill -HUP `cat {{ file_pid }}`"
-  when: uvicorn_running|bool
+- name: "reload supervisor"
+  shell: "kill -HUP `cat {{ supervisor_pidfile }}`"
+  when: supervisor_running|bool
 
 - name: "reload nginx"
   service: "name=nginx state=reloaded"

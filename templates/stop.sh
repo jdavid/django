@@ -1,4 +1,4 @@
 {% if prefix %}
 export PATH="{{ prefix }}/bin:$PATH"
 {% endif %}
-kill -TERM `cat {{ file_pid }}`
+kill -TERM `cat {{ supervisord_pidfile }}`

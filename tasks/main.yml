@@ -26,8 +26,8 @@
 - import_tasks: "database.yml"
 - import_tasks: "node_modules.yml"
 
-# uvicorn, nginx, monit
-- import_tasks: "uvicorn.yml"
+# supervisor, nginx, monit
+- import_tasks: "supervisor.yml"
 
 - import_tasks: "static.yml"
   when: django_web

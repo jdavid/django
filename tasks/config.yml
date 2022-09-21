@@ -4,6 +4,7 @@
     django_cert: "{{ django_cert|default({}) }}"
     django_server: "{{ django_server|default({}) }}"
     django_web: "{{ django_web|default({}) }}"
+    supervisor: "{{ django_web|default({}) }}"
 
 # We cannot override django_server because facts and role parameters live in
 # different namespaces, where role params take precedence. So we would have a
@@ -14,5 +15,6 @@
     django_cert_combined: "{{ django_cert_defaults | combine(django_cert, recursive=True) }}"
     django_server_combined: "{{ django_server_defaults | combine(django_server, recursive=True) }}"
     django_web_combined: "{{ django_web_defaults | combine(django_web, recursive=True) }}"
+    supervisor_combined: "{{ supervisor_defaults | combine(supervisor, recursive=True) }}"
 
 - debug: var=django_web_combined

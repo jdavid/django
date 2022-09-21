@@ -1,0 +1,34 @@
+#
+# Supervisor
+#
+
+- name: "Paths to Supervisor files"
+  set_fact:
+    supervisord_sock: "{{ dir_run }}/supervisord.socket"
+    supervisord_pidfile : "{{ dir_run }}/supervisord.pid"
+    supervisord_logfile : "{{ dir_log }}/supervisord.log"
+
+- name: "Check Supervisor is running (1/2)"
+  stat:
+    path: "{{ supervisord_pidfile }}"
+  register: "__aux"
+
+- name: "Check Supervisor is running (2/2)"
+  set_fact:
+    supervisor_running: "{{ __aux.stat.exists }}"
+
+- name: "Supervisor configuration"
+  template:
+    src: "{{ supervisor_combined.template }}"
+    src: "supervisor.conf"
+    dest: "{{ dir_etc }}/supervisor.conf"
+  notify: "reload supervisor"
+
+- name: "Start/Stop scripts"
+  template:
+    src: "{{ item }}"
+    dest: "{{ dir_etc }}/{{ item }}"
+    mode: "0744"
+  with_items:
+  - "start.sh"
+  - "stop.sh"

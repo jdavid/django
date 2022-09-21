@@ -8,10 +8,9 @@ prefix            : null
 virtualenv        : true # create virtualenv or not
 pythonpath        : null # extra pythonpath
 
-# Upstream server (uvicorn)
+# Upstream server
 django_server_defaults:
   port    : null
-  threads : 1
   workers : 4
 
 # Nginx
@@ -26,6 +25,10 @@ django_web_defaults:
 # This is only used by Nginx
 django_cert_defaults:
   email: ""
+
+# Supervisor
+supervisor_defaults:
+  template      : "supervisor.conf"
 
 #
 # Django
