@@ -7,6 +7,7 @@
     supervisord_sock: "{{ dir_run }}/supervisord.socket"
     supervisord_pidfile : "{{ dir_run }}/supervisord.pid"
     supervisord_logfile : "{{ dir_log }}/supervisord.log"
+    uvicorn_sock: "{{ dir_run }}/uvicorn.socket"
 
 - name: "Check Supervisor is running (1/2)"
   stat:
