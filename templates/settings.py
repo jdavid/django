@@ -44,7 +44,7 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 # URLs
 {% if django_debug %}
 BASE_URL = 'http://localhost:{{ django_server_combined.port }}'
-{% elif django_web_combined.https %}
+{% elif nginx_combined.https %}
 BASE_URL = 'https://{{ django_domains[0] }}'
 {% else %}
 BASE_URL = 'http://{{ django_domains[0] }}'
@@ -64,7 +64,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 {% endif %}
 
 # Security
-{% if django_web_combined.https %}
+{% if nginx_combined.https %}
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 {% endif %}
 

@@ -5,19 +5,19 @@
   file:
     path: "{{ dir_www }}/.well-known/acme-challenge"
     state: "directory"
-  when: django_web_combined.https|bool
+  when: nginx_combined.https|bool
 
 - name: "Certbot ping file (for testing only)"
   copy:
     dest: "{{ dir_www }}/.well-known/acme-challenge/ping"
     content: "pong"
-  when: django_web_combined.https|bool
+  when: nginx_combined.https|bool
 
 - name: "Certbot configuration"
   template:
     src: "certbot.conf"
     dest: "{{ dir_etc }}/certbot.conf"
-  when: django_web_combined.https|bool
+  when: nginx_combined.https|bool
 
 #
 # HTTPS or HTTP
@@ -27,19 +27,19 @@
   set_fact:
     certificate: "/etc/letsencrypt/live/{{ django_domains[0] }}/fullchain.pem"
     certificate_key: "/etc/letsencrypt/live/{{ django_domains[0] }}/privkey.pem"
-  when: django_web_combined.https|bool
+  when: nginx_combined.https|bool
 
 - name: "Certificate is there or not"
   stat:
     path: "{{ certificate }}"
   register: "st"
-  when: django_web_combined.https|bool
+  when: nginx_combined.https|bool
 
 - name: "Certificate not there, then make it empty"
   set_fact:
     certificate: ""
     certificate_key: ""
-  when: "django_web_combined.https and st.stat.exists == False"
+  when: "nginx_combined.https and st.stat.exists == False"
 
 #
 # Nginx
@@ -47,7 +47,7 @@
 
 - name: "Nginx configuration"
   template:
-    src: "{{ django_web_combined.template }}"
+    src: "{{ nginx_combined.template }}"
     dest: "{{ dir_etc }}/nginx.conf"
   notify: "reload nginx"
 

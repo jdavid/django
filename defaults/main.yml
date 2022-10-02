@@ -14,7 +14,7 @@ django_server_defaults:
   workers : 4
 
 # Nginx
-django_web_defaults:
+nginx_defaults:
   template      : "nginx.conf"
   http          : true
   https         : false
@@ -28,7 +28,11 @@ django_cert_defaults:
 
 # Supervisor
 supervisor_defaults:
+  daemon        : false
   template      : "supervisor.conf"
+
+celery_defaults:
+  workers: 1
 
 #
 # Django
