@@ -1,5 +1,5 @@
 - name: "reload supervisor"
-  shell: "kill -HUP `cat {{ supervisor_pidfile }}`"
+  shell: "kill -HUP `cat {{ supervisord_pidfile }}`"
   when: supervisor_running|bool
 
 - name: "reload nginx"
