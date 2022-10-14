@@ -21,7 +21,6 @@
 - name: "Supervisor configuration"
   template:
     src: "{{ supervisor_combined.template }}"
-    src: "supervisor.conf"
     dest: "{{ dir_etc }}/supervisor.conf"
   notify: "reload supervisor"
 
