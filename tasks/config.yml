@@ -2,19 +2,18 @@
 - name: "Make sure config dicts exist"
   set_fact:
     django_cert: "{{ django_cert|default({}) }}"
-    django_server: "{{ django_server|default({}) }}"
+    django: "{{ django|default({}) }}"
     nginx: "{{ nginx|default({}) }}"
     supervisor: "{{ supervisor|default({}) }}"
     celery: "{{ celery|default({}) }}"
 
-# We cannot override django_server because facts and role parameters live in
-# different namespaces, where role params take precedence. So we would have a
-# django_server role param and a django_server fact, with the role param taking
-# precedence.
+# We cannot override 'django' because facts and role parameters live in different
+# namespaces, where role params take precedence. So we would have a 'serve'r role param
+# and a 'django' fact, with the role param taking precedence.
 
 - set_fact:
     django_cert_combined: "{{ django_cert_defaults | combine(django_cert, recursive=True) }}"
-    django_server_combined: "{{ django_server_defaults | combine(django_server, recursive=True) }}"
+    django_combined: "{{ django_defaults | combine(django, recursive=True) }}"
     celery_combined: "{{ celery_defaults | combine(celery, recursive=True) }}"
     nginx_combined: "{{ nginx_defaults | combine(nginx, recursive=True) }}"
     supervisor_combined: "{{ supervisor_defaults | combine(supervisor, recursive=True) }}"

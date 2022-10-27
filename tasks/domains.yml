@@ -1,18 +1,10 @@
 #
 # List of domains
 #
-# Input : django_domain
-# Output: django_domains
+# Input : domains
+# Output: domains
 #
 
-- name: "List of domain names (if string)"
-  set_fact:
-    django_domains: ["{{ django_domain }}"]
-  when: django_domain is string
-
-- name: "List of domain names (if list)"
-  set_fact:
-    django_domains: "{{ django_domain }}"
-  when: django_domain is not string
-
-#- debug: var=django_domains
+- set_fact:
+    domains: "{{ domains + ['localhost', '127.0.0.1', '::1'] }}"
+  when: django_combined.debug

@@ -1,5 +1,5 @@
 python_version    : "3.9"
-pip_version       : "22.2.2"
+pip_version       : "22.3"
 
 #
 # Python environment
@@ -9,9 +9,10 @@ virtualenv        : true # create virtualenv or not
 pythonpath        : null # extra pythonpath
 
 # Upstream server
-django_server_defaults:
-  port    : null
-  workers : 4
+django_defaults:
+  debug         : true
+  port          : null
+  workers       : 4
 
 # Nginx
 nginx_defaults:
@@ -38,22 +39,21 @@ celery_defaults:
 # Django
 #
 
-django_repo       : ""
-django_branch     : "master"
-django_name       : ""
+django_repo     : ""
+django_branch   : "master"
+django_name     : ""
 
-django_root       : ""
+django_root     : ""
 
-django_project    : "project"
+django_project  : "project"
 
-django_database   :
-  engine          : "default"
+database        :
+  engine        : "default"
 
-django_cache      :
-  backend         : "default"
+cache           :
+  backend       : "default"
 
-django_debug      : true
-django_domain     : "{% if 'address' in ansible_default_ipv4 %}{{ ansible_default_ipv4.address }}.nip.io{% endif %}"
+domains           : ["{{ ansible_default_ipv4.address }}.nip.io"]
 django_pull       : false
 django_with_monit : false
 django_with_node  : false

@@ -6,8 +6,20 @@
 # Requires: dir_venv, settings
 #
 
+- name: "Create PostgreSQL user"
+  community.postgresql.postgresql_user:
+    name: "{{ database.user }}"
+    password: "{{ database.password }}"
+  when: database.engine == 'postgres'
+
+- name: "Create PostgreSQL database"
+  community.postgresql.postgresql_db:
+    name: "{{ database.name }}"
+    owner: "{{ database.user }}"
+  when: database.engine == 'postgres'
+
 # FIXME It says 'ok' when it should say 'changed'
-- name: "Create database"
+- name: "Apply database migrations"
   django_manage:
     virtualenv: "{{ dir_venv|default(omit) }}"
     project_path: "{{ django_root }}"
