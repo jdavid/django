@@ -11,12 +11,14 @@
     name: "{{ database.user }}"
     password: "{{ database.password }}"
   when: database.engine == 'postgres'
+  ignore_errors: yes
 
 - name: "Create PostgreSQL database"
   community.postgresql.postgresql_db:
     name: "{{ database.name }}"
     owner: "{{ database.user }}"
   when: database.engine == 'postgres'
+  ignore_errors: yes
 
 # FIXME It says 'ok' when it should say 'changed'
 - name: "Apply database migrations"
