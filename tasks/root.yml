@@ -15,8 +15,6 @@
 # Case 2: root not given, assume
 - name: "Path to working tree root directory (1/2)"
   command: "git rev-parse --show-toplevel"
-  args:
-    warn: false
   register: "__aux"
   changed_when: false
   when: "django_root == ''"
