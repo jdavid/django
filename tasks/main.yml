@@ -11,6 +11,7 @@
 
 # Variables (facts)
 - import_tasks: "domains.yml"
+- import_tasks: "python.yml"
 - import_tasks: "pythonpath.yml"
 
 # Virtual environment

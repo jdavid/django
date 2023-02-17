@@ -4,12 +4,7 @@
 # Input : django_root
 # Output: dir_var, dir_run, dir_etc, dir_log, dir_static, dir_media,
 #         dir_sendfile, dir_www, dir_venv
-#         python_version_short
 #
-
-- name: "Python version"
-  set_fact:
-    python_version_short: "{{ python_version|regex_replace('\\.', '') }}"
 
 - name: "Directories"
   set_fact:

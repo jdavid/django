@@ -1,0 +1,11 @@
+
+- name: "Python version"
+  set_fact:
+    python_version: "{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}"
+  when: python_version is not defined
+
+- debug: var=python_version
+
+- name: "Python version (short)"
+  set_fact:
+    python_version_short: "{{ python_version|regex_replace('\\.', '') }}"
