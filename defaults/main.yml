@@ -20,6 +20,7 @@ nginx_defaults:
   http          : true
   https         : false
   hsts          : 0
+  log_format    : "combined"
   max_body_size : "10m"
   timeout       : null
 
