@@ -21,7 +21,7 @@ nginx_defaults:
   https         : false
   hsts          : 0
   log_format    : "combined"
-  max_body_size : "10m"
+  max_body_size : null
   timeout       : null
 
 # This is only used by Nginx
@@ -40,21 +40,23 @@ celery_defaults:
 # Django
 #
 
-django_repo     : ""
-django_branch   : "master"
-django_name     : ""
+django_repo       : ""
+django_branch     : "master"
+django_name       : ""
 
-django_root     : ""
+django_root       : ""
 
-django_project  : "project"
+django_project    : "project"
 
-database        :
-  engine        : "default"
+database          :
+  engine          : "default"
 
-cache           :
-  backend       : "default"
+cache             :
+  backend         : "default"
 
 domains           : ["{{ ansible_default_ipv4.address }}.nip.io"]
+redirects         : {}
+
 django_pull       : false
 django_with_monit : false
 django_with_node  : false
