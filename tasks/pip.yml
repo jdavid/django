@@ -33,7 +33,7 @@
   when: virtualenv|bool
 
 - name: "Create virtual environment"
-  pip:
+  ansible.builtin.pip:
     chdir: "{{ django_root }}"
     name: "pip=={{ pip_version }}"
     virtualenv: "{{ dir_venv }}"
@@ -47,7 +47,7 @@
 
 # Update pip when not using a virtual environment
 - name: "Update pip"
-  pip:
+  ansible.builtin.pip:
     chdir: "{{ django_root }}"
     name: "pip=={{ pip_version }}"
     executable: "{{ pip }}"
@@ -60,7 +60,14 @@
     dest: "{{ dir_etc }}/requirements.txt"
 
 - name: "Install requirements"
-  pip:
+  ansible.builtin.pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     executable: "{{ pip }}"
+
+- name: "Install requirements from mods"
+  ansible.builtin.pip:
+    chdir: "{{ django_root }}"
+    requirements: "{{ item }}/requirements.txt"
+    executable: "{{ pip }}"
+  loop: "{{ mods|default([]) }}"

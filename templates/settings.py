@@ -70,11 +70,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 {% if mods is defined %}
 # Modules
-def execfile(location, name):
-    with (Path(location) / name).open() as file:
+def execfile(filepath):
+    with open(filepath) as file:
         exec(file.read(), globals())
 
 {% for mod in mods %}
-execfile("{{ mod }}".replace('.', '/'), 'settings.py')
+execfile("{{ mod }}/settings.py")
 {% endfor %}
 {% endif %}
