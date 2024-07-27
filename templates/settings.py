@@ -63,12 +63,18 @@ CACHES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 {% endif %}
 
-# Security
 {% if nginx_combined.https %}
+# Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 {% endif %}
 
-# Sendfile
-SENDFILE_BACKEND = 'django_sendfile.backends.{% if django_combined.debug %}development{% else %}nginx{% endif %}'
-SENDFILE_ROOT = '{{ dir_sendfile }}'
-SENDFILE_URL = '{{ sendfile_url }}'
+{% if mods is defined %}
+# Modules
+def execfile(location, name):
+    with (Path(location) / name).open() as file:
+        exec(file.read(), globals())
+
+{% for mod in mods %}
+execfile("{{ mod }}".replace('.', '/'), 'settings.py')
+{% endfor %}
+{% endif %}

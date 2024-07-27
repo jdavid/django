@@ -8,7 +8,7 @@
     celery: "{{ celery|default({}) }}"
 
 # We cannot override 'django' because facts and role parameters live in different
-# namespaces, where role params take precedence. So we would have a 'serve'r role param
+# namespaces, where role params take precedence. So we would have a 'django' role param
 # and a 'django' fact, with the role param taking precedence.
 
 - set_fact:
