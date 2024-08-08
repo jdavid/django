@@ -71,3 +71,4 @@
     requirements: "{{ item }}/requirements.txt"
     executable: "{{ pip }}"
   loop: "{{ mods|default([]) }}"
+  when: "'{{ item }}/requirements.txt' is exists"
