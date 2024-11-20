@@ -6,8 +6,4 @@
 #
 
 - set_fact:
-    domains: "{{ domains + ['localhost', '127.0.0.1', '::1'] }}"
-  when: django_combined.debug
-
-- set_fact:
     domains_and_redirects: "{{ domains + redirects.keys()|list }}"
