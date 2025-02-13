@@ -1,8 +1,0 @@
-- The pid file is not removed on container/server/program shutdown and monit
-  fails to start the program if the pid is used by someone else after startup,
-  with "failed to get process data" message
-- Use memcached in production, follow https://code.djangoproject.com/ticket/29887
-- Use git_config in "Find out Git url"
-- Use letsencrypt
-- Try again npm once Ansible 2.10 is released
-- Review role variables naming

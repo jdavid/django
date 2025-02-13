@@ -1,0 +1,7 @@
+- Nginx: Compress static files
+- Ansible: Fix "conditional statements should not include jinja2 templating delimiters"
+- Ansible: Use git_config module instead of "git config"?
+- Ansible: Use letsencrypt module?
+- Monit will fail to start the program if stale pid file exists and the pid is
+  used by another process, this may happen after an unclean shutdown. The error
+  will be "failed to get process data".
