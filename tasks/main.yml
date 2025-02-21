@@ -24,7 +24,7 @@
 
 # Required
 - import_tasks: "settings.yml"
-- import_tasks: "manage.yml"
+- import_tasks: "templates.yml"
 - import_tasks: "database.yml"
 - import_tasks: "supervisor.yml"
 

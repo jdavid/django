@@ -1,5 +1,0 @@
-- name: "Generate manage.py"
-  template:
-    src: "manage.py"
-    dest: "{{ django_root }}/manage.py"
-    mode: "u+x"

@@ -1,0 +1,16 @@
+- name: "Generate manage.py"
+  template:
+    src: "manage.py"
+    dest: "{{ django_root }}/manage.py"
+    mode: "u+x"
+
+- filter_mods:
+    base: "{{ django_root }}"
+    dirs: "{{ mods }}"
+    name: "urls.py"
+    dest: "mods_urls"
+
+- name: "Generate urls_ansible.py"
+  template:
+    src: "urls_ansible.py.jinja"
+    dest: "{{ django_root }}/{{ django_project }}/urls_ansible.py"
