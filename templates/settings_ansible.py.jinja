@@ -77,7 +77,7 @@ def execfile(filepath):
     with open(filepath) as file:
         exec(file.read(), globals())
 
-{% for mod in mods %}
+{% for mod in mods_settings %}
 execfile(BASE_DIR / "{{ mod }}" / "settings.py")
 {% endfor %}
 {% endif %}

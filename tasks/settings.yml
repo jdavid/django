@@ -40,7 +40,13 @@
     settings: "{{ django_project }}.settings"
     settings_file: "{{ django_root }}/{{ django_project }}/settings_ansible.py"
 
+- filter_mods:
+    base: "{{ django_root }}"
+    dirs: "{{ mods }}"
+    name: "settings.py"
+    dest: "mods_settings"
+
 - name: "Copy settings file"
   template:
-    src: "settings.py"
+    src: "settings_ansible.py.jinja"
     dest: "{{ settings_file }}"

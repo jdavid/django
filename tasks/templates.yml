@@ -1,6 +1,6 @@
 - name: "Generate manage.py"
   template:
-    src: "manage.py"
+    src: "manage.py.ninja"
     dest: "{{ django_root }}/manage.py"
     mode: "u+x"
 
