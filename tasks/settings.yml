@@ -37,7 +37,7 @@
 #
 - name: "Settings: facts"
   set_fact:
-    settings: "{{ django_project }}.settings_custom"
+    settings: "{{ django_project }}.settings"
     settings_file: "{{ django_root }}/{{ django_project }}/settings_ansible.py"
 
 - name: "Copy settings file"
