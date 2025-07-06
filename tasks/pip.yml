@@ -59,16 +59,18 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
+- name: "Append module requirements to main file"
+  ansible.builtin.lineinfile:
+    path: "{{ dir_etc }}/requirements.txt"
+    line: |
+      # {{ item }}
+      {{ lookup('file', django_root + '/' + item) }}
+    insertafter: EOF
+  loop: "{{ mods|default([])|map('regex_replace', '$', '/requirements.txt')|list }}"
+  when: item is file
+
 - name: "Install requirements"
   ansible.builtin.pip:
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     executable: "{{ pip }}"
-
-- name: "Install requirements from mods"
-  ansible.builtin.pip:
-    chdir: "{{ django_root }}"
-    requirements: "{{ item }}/requirements.txt"
-    executable: "{{ pip }}"
-  loop: "{{ mods|default([]) }}"
-  when: "'{{ item }}/requirements.txt' is exists"
