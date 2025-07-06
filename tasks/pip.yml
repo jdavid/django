@@ -35,7 +35,8 @@
 - name: "Create virtual environment"
   ansible.builtin.pip:
     chdir: "{{ django_root }}"
-    name: "pip=={{ pip_version }}"
+    name: pip
+    state: latest
     virtualenv: "{{ dir_venv }}"
     virtualenv_command: "{{ python_sys + ' -m venv' }}"
   when: virtualenv|bool
@@ -46,10 +47,11 @@
   when: virtualenv|bool
 
 # Update pip when not using a virtual environment
-- name: "Update pip"
+- name: "Update pip to latest version"
   ansible.builtin.pip:
     chdir: "{{ django_root }}"
-    name: "pip=={{ pip_version }}"
+    name: pip
+    state: latest
     executable: "{{ pip }}"
   when: not virtualenv
 
