@@ -61,15 +61,24 @@
     src: "requirements.txt"
     dest: "{{ dir_etc }}/requirements.txt"
 
-- name: "Append module requirements to main file"
-  ansible.builtin.lineinfile:
-    path: "{{ dir_etc }}/requirements.txt"
-    line: |
-      # {{ item }}
-      {{ lookup('file', django_root + '/' + item) }}
-    insertafter: EOF
-  loop: "{{ mods|default([])|map('regex_replace', '$', '/requirements.txt')|list }}"
-  when: item is file
+- name: "Check and append module requirements"
+  block:
+    - name: "Read module requirements from remote server"
+      ansible.builtin.slurp:
+        src: "{{ django_root }}/{{ item }}"
+      register: mod_requirements
+      loop: "{{ mods|default([])|map('regex_replace', '$', '/requirements.txt')|list }}"
+      when: item is file  # You might want to keep this check or use stat first
+
+    - name: "Append module requirements to main file"
+      ansible.builtin.lineinfile:
+        path: "{{ dir_etc }}/requirements.txt"
+        line: |
+          # {{ item.item }}
+          {{ item.content | b64decode }}
+        insertafter: EOF
+      loop: "{{ mod_requirements.results }}"
+      when: item.content is defined
 
 - name: "Install requirements"
   ansible.builtin.pip:
