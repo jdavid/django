@@ -22,10 +22,12 @@
 - import_tasks: "pip.yml"
   tags: [pip]
 
+# Databases
+- import_tasks: "postgres.yml"
+  when: postgres is defined
+
 # Required
-- import_tasks: "settings.yml"
-- import_tasks: "templates.yml"
-- import_tasks: "database.yml"
+- import_tasks: "django.yml"
 - import_tasks: "supervisor.yml"
 
 # Options

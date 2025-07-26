@@ -47,9 +47,6 @@ django_root       : ""
 
 django_project    : "project"
 
-database          :
-  engine          : "default"
-
 cache             :
   backend         : "default"
 

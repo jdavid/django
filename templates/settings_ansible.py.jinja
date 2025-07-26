@@ -6,21 +6,6 @@
 
 from {{ django_project }}.settings_django import *
 
-{% if database.engine == 'default' %}
-{% elif database.engine == 'postgres' %}
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{ database.name }}',
-        'USER': '{{ database.user }}',
-        'PASSWORD': '{{ database.password }}',
-        'HOST': '{{ database.host|default() }}',    # Set to empty string for localhost.
-        'PORT': '',                                 # Set to empty string for default.
-    }
-}
-{% endif %}
-
 # Debug
 DEBUG = {{ django_combined.debug }}
 {% if django_combined.debug %}
@@ -53,31 +38,12 @@ BASE_URL = 'https://{{ domains[0] }}'
 BASE_URL = 'http://{{ domains[0] }}'
 {% endif %}
 
-{% if cache.backend == 'default' %}
-{% elif cache.backend == 'memcached' %}
-# Cache
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': '{{ cache.location }}',
-    }
-}
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
-{% endif %}
-
 {% if nginx_combined.https %}
 # Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 {% endif %}
 
-{% if mods is defined %}
-# Modules
-def execfile(filepath):
-    with open(filepath) as file:
-        exec(file.read(), globals())
-
 {% for mod in mods_settings %}
-execfile(BASE_DIR / "{{ mod }}" / "settings.py")
+# {{ mod }}/settings.py
+{{ lookup('template', '../' + mod + '/settings.py') }}
 {% endfor %}
-{% endif %}

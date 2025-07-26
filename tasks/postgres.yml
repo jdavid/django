@@ -1,0 +1,19 @@
+#
+# Setup database
+#
+# Input : django_root, dir_venv
+# Output:
+# Requires: dir_venv, settings
+#
+
+- name: "Create PostgreSQL user"
+  community.postgresql.postgresql_user:
+    name: "{{ postgres.user }}"
+    password: "{{ postgres.password }}"
+  ignore_errors: yes
+
+- name: "Create PostgreSQL database"
+  community.postgresql.postgresql_db:
+    name: "{{ postgres.name }}"
+    owner: "{{ postgres.user }}"
+  ignore_errors: yes

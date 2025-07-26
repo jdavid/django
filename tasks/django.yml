@@ -8,7 +8,7 @@
 
 #
 # Secret key. All this code.. because lookups work in the local host instead of
-# the target server. There should be an simpler way.
+# the target server. There should be a simpler way.
 #
 - name: "Secret key: facts"
   set_fact:
@@ -50,3 +50,38 @@
   template:
     src: "settings_ansible.py.jinja"
     dest: "{{ settings_file }}"
+
+#
+# manage.py
+#
+- name: "Generate manage.py"
+  template:
+    src: "manage.py.jinja"
+    dest: "{{ django_root }}/manage.py"
+    mode: "u+x"
+
+#
+# urls
+#
+
+- filter_mods:
+    base: "{{ django_root }}"
+    dirs: "{{ mods }}"
+    name: "urls.py"
+    dest: "mods_urls"
+
+- name: "Generate urls_ansible.py"
+  template:
+    src: "urls_ansible.py.jinja"
+    dest: "{{ django_root }}/{{ django_project }}/urls_ansible.py"
+
+#
+# Migrations
+# FIXME It says 'ok' when it should say 'changed'
+#
+- name: "Apply database migrations"
+  django_manage:
+    virtualenv: "{{ dir_venv|default(omit) }}"
+    project_path: "{{ django_root }}"
+    settings: "{{ settings }}"
+    command: "migrate"
