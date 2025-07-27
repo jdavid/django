@@ -1,0 +1,6 @@
+{{ lookup('template', 'requirements.txt') }}
+
+{% for mod in mods_requirements %}
+# {{ mod }}/requirements.txt
+{{ lookup('template', '../' + mod + '/requirements.txt') }}
+{% endfor %}
