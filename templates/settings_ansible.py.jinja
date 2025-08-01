@@ -43,6 +43,18 @@ BASE_URL = 'http://{{ domains[0] }}'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 {% endif %}
 
+# Helper functions to be used by the mods
+def insert(items, name, before=None, after=None):
+    assert type(items) is list
+    assert type(name) is str
+    assert not (before and after)
+
+    if before is None and after is None:
+        after = items[-1]
+
+    i = items.index(before) if before else items.index(after) + 1
+    items.insert(i, name)
+
 {% for mod in mods_settings %}
 # {{ mod }}/settings.py
 {{ lookup('template', '../' + mod + '/settings.py') }}
