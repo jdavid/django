@@ -35,10 +35,10 @@
   when: django_with_node|bool
 
 - import_tasks: "static.yml"
-  when: nginx
+  when: nginx|bool
 
 - import_tasks: "nginx.yml"
-  when: nginx
+  when: nginx|bool
 
 - import_tasks: "monit.yml"
   when: django_with_monit|bool

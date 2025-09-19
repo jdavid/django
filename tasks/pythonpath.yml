@@ -7,11 +7,11 @@
     base: "{{ django_root }}"
     path: "{{ pythonpath }}"
   register: pythonpath
-  when: pythonpath
+  when: pythonpath is not none
 
 - name: "Extra PYTHONPATH (2/2)"
   set_fact:
     pythonpath: "{{ pythonpath.realpath }}"
-  when: pythonpath
+  when: pythonpath is not none
 
 #- debug: var=pythonpath
