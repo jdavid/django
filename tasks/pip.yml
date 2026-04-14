@@ -72,3 +72,4 @@
     chdir: "{{ django_root }}"
     requirements: "{{ dir_etc }}/requirements.txt"
     executable: "{{ pip }}"
+    state: latest
