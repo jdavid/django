@@ -1,3 +1,5 @@
+# ruff: noqa: E402 F403 F405
+
 #
 # DO NOT MODIFY THIS FILE.
 #
@@ -42,6 +44,9 @@ BASE_URL = 'http://{{ domains[0] }}'
 # Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 {% endif %}
+
+# Fix for Django 6.0 and uvicorn with unix sockets
+USE_X_FORWARDED_PORT = True
 
 # Helper functions to be used by the mods
 def insert(items, name, before=None, after=None):
