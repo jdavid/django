@@ -11,7 +11,14 @@ pythonpath        : null # extra pythonpath
 django_defaults:
   debug         : true
   port          : null
-  workers       : 4
+
+# Gunicorn
+gunicorn_defaults:
+  workers             : 4
+  # Set max_requests to enable worker recycling (e.g. 1000)
+  max_requests        : null
+  # Jitter added to max_requests to avoid all workers restarting at once
+  max_requests_jitter : null
 
 # Nginx
 nginx_defaults:

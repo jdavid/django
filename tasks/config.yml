@@ -3,6 +3,7 @@
   set_fact:
     django_cert: "{{ django_cert|default({}) }}"
     django: "{{ django|default({}) }}"
+    gunicorn: "{{ gunicorn|default({}) }}"
     nginx: "{{ nginx|default({}) }}"
     supervisor: "{{ supervisor|default({}) }}"
     celery: "{{ celery|default({}) }}"
@@ -14,6 +15,7 @@
 - set_fact:
     django_cert_combined: "{{ django_cert_defaults | combine(django_cert, recursive=True) }}"
     django_combined: "{{ django_defaults | combine(django, recursive=True) }}"
+    gunicorn_combined: "{{ gunicorn_defaults | combine(gunicorn, recursive=True) }}"
     celery_combined: "{{ celery_defaults | combine(celery, recursive=True) }}"
     nginx_combined: "{{ nginx_defaults | combine(nginx, recursive=True) }}"
     supervisor_combined: "{{ supervisor_defaults | combine(supervisor, recursive=True) }}"
