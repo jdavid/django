@@ -7,7 +7,7 @@
     supervisord_sock: "{{ dir_run }}/supervisord.socket"
     supervisord_pidfile : "{{ dir_run }}/supervisord.pid"
     supervisord_logfile : "{{ dir_log }}/supervisord.log"
-    uvicorn_sock: "{{ dir_run }}/uvicorn.socket"
+    gunicorn_sock: "{{ dir_run }}/gunicorn.socket"
 
 - name: "Check Supervisor is running (1/2)"
   stat:
@@ -17,6 +17,13 @@
 - name: "Check Supervisor is running (2/2)"
   set_fact:
     supervisor_running: "{{ __aux.stat.exists }}"
+
+- name: "Rotate logs before reload"
+  command: "./ansible/rotate-logs.sh"
+  args:
+    chdir: "{{ django_root }}"
+  when: supervisor_running|bool
+  failed_when: false
 
 - name: "Supervisor configuration"
   template:
@@ -32,3 +39,13 @@
   with_items:
   - "start.sh"
   - "stop.sh"
+
+- name: "Flush handlers to reload supervisor before compression"
+  meta: flush_handlers
+
+- name: "Compress rotated logs"
+  command: "./ansible/rotate-logs.sh --compress"
+  args:
+    chdir: "{{ django_root }}"
+  when: supervisor_running|bool
+  failed_when: false
