@@ -18,13 +18,6 @@
   set_fact:
     supervisor_running: "{{ __aux.stat.exists }}"
 
-- name: "Rotate logs before reload"
-  command: "./ansible/rotate-logs.sh"
-  args:
-    chdir: "{{ django_root }}"
-  when: supervisor_running|bool
-  failed_when: false
-
 - name: "Supervisor configuration"
   template:
     src: "{{ supervisor_combined.template }}"
@@ -39,13 +32,3 @@
   with_items:
   - "start.sh"
   - "stop.sh"
-
-- name: "Flush handlers to reload supervisor before compression"
-  meta: flush_handlers
-
-- name: "Compress rotated logs"
-  command: "./ansible/rotate-logs.sh --compress"
-  args:
-    chdir: "{{ django_root }}"
-  when: supervisor_running|bool
-  failed_when: false
