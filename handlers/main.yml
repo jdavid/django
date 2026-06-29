@@ -2,6 +2,10 @@
   shell: "kill -HUP `cat {{ supervisord_pidfile }}`"
   when: supervisor_running|bool
 
+- name: "restart gunicorn"
+  shell: "{{ dir_bin }}/supervisorctl -c {{ dir_etc }}/supervisor.conf restart gunicorn"
+  when: supervisor_running|bool
+
 - name: "reload nginx"
   service: "name=nginx state=reloaded"
   become: true
